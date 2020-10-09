@@ -1,21 +1,7 @@
-// In memory db by now...
-class Friend {
-  constructor(id, { firstName, lastName, gender, age, language, email, contacts }) {
-    this.id = id;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.gender = gender;
-    this.age = age;
-    this.language = language;
-    this.email = email;
-    this.contacts = contacts;
-  }
-}
-// temp db
-const friendDatabase = {};
-// End temp gb...
+import mongoose from 'mongoose';
+import { Friends } from '../data/friendResolvers';
 
-// reolver Map from graphql-tools
+// resolver Map from graphql-tools
 export const resolvers = {
   Query: {
     // get Friend by Id
@@ -25,10 +11,27 @@ export const resolvers = {
   },
   Mutation: {
     // create resolver
-    createFriend: ({ input }) => {
-      let id = require('crypto').randomBytes(10).toString('hex');
-      friendDatabase[id] = input;
-      return new Friend(id, input);
+    createFriend: (root, { input }) => {
+      const newFriend = new Friends({
+        firstName: input.firstName,
+        lastName: input.latName,
+        gender: input.gender,
+        age: input.age,
+        language: input.language,
+        email: input.email,
+        contacts: input.contacts,
+      });
+      // assigning an ID
+      newFriend.id =  newFriend._id;
+      // return a new promise for waiting for the response
+      return new Promise((resolve, reject) => {
+        newFriend.save((err, friend) => {
+          if (err) reject(err);
+          else resolve(friend);
+        });
+      });
+      // return newFriend;
     },
   }
 };
+

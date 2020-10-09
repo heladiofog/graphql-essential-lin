@@ -1,4 +1,4 @@
-import { resolvers } from '../resolvers/friendResolvers';
+import { resolvers } from '../data/friendResolvers';
 import { makeExecutableSchema } from 'graphql-tools';
 
 const typeDefs = `
