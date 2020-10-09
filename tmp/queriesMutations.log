@@ -22,3 +22,16 @@ mutation {
     firstName
   }
 }
+## Adding enums to restrict data types as field values on schemas
+mutation {
+  createFriend(input: {
+    firstName: "Lalo"
+    lastName: "Rdgz"
+    gender: OTHER
+    age:16
+    language: "Spanish"
+  }) {
+    id
+    firstName
+  }
+}
