@@ -1,4 +1,4 @@
-import { Friends } from '../data/dbConnectors';
+import { Friends, Aliens } from '../data/dbConnectors';
 
 // resolver Map from graphql-tools
 export const resolvers = {
@@ -11,6 +11,10 @@ export const resolvers = {
     getFriend: ({ id }) => {
       return new Friend(id, friendDatabase[id]);
     },
+    // Gel aliens
+    getAliens: () => {
+      return Aliens.findAll();
+    }
   },
   Mutation: {
     // create resolver

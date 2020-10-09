@@ -10,6 +10,21 @@ query {
   email
  } 
 }
+## List them all
+query {
+ getAllFriends {
+   id
+  	firstName
+  lastName
+  age
+  gender
+  contacts {
+    firstName
+    lastName
+  }
+  
+ }
+}
 ## Queries with list within fields
 query {
  getFriend(id: "ad418be43bee4f927ffe") {
@@ -61,4 +76,20 @@ mutation {
       lastName
     }
   }
+}
+##Edit
+mutation {
+  updateFriend(input: {
+    id: "5f80ed635bc84472d5383805"
+    firstName: "Linhet"
+    lastName: "Jaen Moreno"
+  }) {
+    id
+    firstName
+    lastName
+  }
+}
+##Delete
+mutation {
+  deleteFriend(id: "5f80f1b5224eb973c30f5d92")
 }
