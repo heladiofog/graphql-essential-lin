@@ -1,6 +1,6 @@
 # Queries
 query {
- friend {
+ getFriend(id: "630396bfb4ce638b843a") {
   id
 	firstName
   lastName
@@ -10,5 +10,15 @@ query {
   email
  } 
 }
-
 # Mutations
+mutation {
+  createFriend(input: {
+    firstName: "Lalo"
+    lastName: "Rdgz"
+    gender: "Male"
+    language: "Spanish"
+  }) {
+    id
+    firstName
+  }
+}
