@@ -1,11 +1,12 @@
 
 // In memory db by now...
 class Friend {
-  constructor(id, { firstName, lastName, gender, language, email }) {
+  constructor(id, { firstName, lastName, gender, age, language, email }) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.gender = gender;
+    this.age = age;
     this.language = language;
     this.email = email;
   }
