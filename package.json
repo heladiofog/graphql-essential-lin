@@ -25,11 +25,15 @@
   },
   "homepage": "https://github.com/heladiofog/graphql-essential-lin#readme",
   "dependencies": {
+    "casual": "^1.6.2",
     "express": "^4.17.1",
     "express-graphql": "^0.11.0",
     "graphql": "^15.3.0",
     "graphql-tools": "^6.2.4",
-    "mongoose": "^5.10.9"
+    "lodash": "^4.17.20",
+    "mongoose": "^5.10.9",
+    "sequelize": "^6.3.5",
+    "sqlite3": "^5.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.11.6",
