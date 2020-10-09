@@ -10,6 +10,23 @@ query {
   email
  } 
 }
+## Queries with list within fields
+query {
+ getFriend(id: "ad418be43bee4f927ffe") {
+  id
+	firstName
+  lastName
+  age
+  language
+  gender
+  email
+  contacts {
+    lastName
+  }
+ } 
+}
+
+
 # Mutations
 mutation {
   createFriend(input: {
@@ -33,5 +50,15 @@ mutation {
   }) {
     id
     firstName
+  }
+}
+## Adding list of types to mutationmutation {
+  createFriend(input: {firstName: "Lalo", lastName: "Rdgz", gender: OTHER, age: 16, language: "Spanish", contacts: [{firstName: "Memo", lastName: "Lara"}, {firstName: "Fercho", lastName: "Pérez"}]}) {
+    id
+    firstName
+    contacts {
+      firstName
+      lastName
+    }
   }
 }
