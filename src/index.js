@@ -1,4 +1,6 @@
 import express from 'express';
+import { graphqlHTTP } from 'express-graphql';
+import schema from './schema';
 
 const app = express();
 
@@ -6,6 +8,30 @@ app.get('/', (req, res) => {
   console.log("[req.url]", req.url, req.headers.host)
   res.send({ success: true, "message": 'GraphQL is starting!' });
 });
+
+// Root resolver:
+// const root = { hello: () => "Hallo, Ich bin Hell!" };
+const root = {
+  friend: () => {
+    return {
+      "id": 23323,
+      "firstName": "Jenny",
+      "lastName": "Johns",
+      "gender": "Female",
+      "language": "English",
+      "emails": [
+        { email: "jeny@gml.com" },
+        { email: "hallo@me.com" }
+      ]
+    }
+  }
+};
+
+app.use('/graphql', graphqlHTTP({
+  schema: schema,
+  rootValue: root,
+  graphiql: true
+}));
 
 app.listen(8000, () => {
   console.log('Running express server on https://localhost:8000');
