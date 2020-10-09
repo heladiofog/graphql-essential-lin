@@ -7,13 +7,18 @@ export const resolvers = {
     getAllFriends: () => {
         return Friends.find();
     },
-    // get Friend by Id
-    getFriend: ({ id }) => {
-      return new Friend(id, friendDatabase[id]);
-    },
     // Gel aliens
     getAliens: () => {
       return Aliens.findAll();
+    },
+    // get Friend by Id
+    getOneFriend: (root, { id }) => {
+      return new Promise((resolve, reject) => {
+        Friends.findById(id, (err, friend) => {
+          if (err) reject(err);
+          else resolve(friend);
+        });
+      });
     }
   },
   Mutation: {
