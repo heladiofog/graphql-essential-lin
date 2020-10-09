@@ -4,6 +4,21 @@ import schema from './schema';
 
 const app = express();
 
+// In memory db by now...
+class Friend {
+  constructor(id, { firstName, lastName, gender, language, email }) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.gender = gender;
+    this.language = language;
+    this.email = email;
+  }
+}
+// temp db
+const friendDatabase = {};
+// End temp gb...
+
 app.get('/', (req, res) => {
   console.log("[req.url]", req.url, req.headers.host)
   res.send({ success: true, "message": 'GraphQL is starting!' });
@@ -24,6 +39,12 @@ const root = {
         { email: "hallo@me.com" }
       ]
     }
+  },
+  // create resolver
+  createFriend: ({ input }) => {
+    let id = require('crypto').randomBytes(10).toString('hex');
+    friendDatabase[id] = input;
+    return new Friend(id, input);
   }
 };
 

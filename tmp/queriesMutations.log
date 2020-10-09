@@ -1,0 +1,14 @@
+# Queries
+query {
+ friend {
+  id
+	firstName
+  lastName
+  
+  language
+  gender
+  email
+ } 
+}
+
+# Mutations
