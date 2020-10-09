@@ -19,6 +19,7 @@ const typeDefs = `
     lastName: String
     planet: String
   }
+
   type Contact {
     firstName: String
     lastName: String
@@ -31,6 +32,7 @@ const typeDefs = `
   }
 
   type Query {
+    getAllFriends: [Friend]
     getFriend(id: ID): Friend
   }
 
@@ -52,9 +54,11 @@ const typeDefs = `
 
   type Mutation {
     createFriend(input: FriendInput): Friend
+    updateFriend(input: FriendInput): Friend
+    deleteFriend(id: ID!): String
   }
 `;
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
-export default { schema };
+export default schema;

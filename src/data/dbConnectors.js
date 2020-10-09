@@ -5,11 +5,10 @@ import casual from 'casual';
 
 // Mongodb connection
 mongoose.Promise = global.Promise;
-monsoose.connect('mongodb://localhost/friends', {
-  useMongoClient: true,
-  // useNewUrlParser: true,
-  // useUnifiedTopology: true,
-  // useFindAndModify: false
+mongoose.connect('mongodb://localhost/friends', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false
 });
 
 // Schema for Friend entity
@@ -47,16 +46,16 @@ const sequelize = new Sequelize('database', null, null, {
 });
 // Schema for sql db
 const Aliens = sequelize.define('aliens', {
-  firstName: { type: Sequelize.String },
-  lastName: { type: Sequelize.String },
-  planet: { type: Sequelize.String },
+  firstName: { type: Sequelize.STRING },
+  lastName: { type: Sequelize.STRING },
+  planet: { type: Sequelize.STRING },
 });
 // Fake data to interact with
 Aliens.sync({ force: true }).then(() => {
   _.times(10, (i) => {
     Aliens.create({
-      firstName: casual._first_name,
-      lastName: casual._last_name,
+      firstName: casual.first_name,
+      lastName: casual.last_name,
       planet: casual.word,
     });
   });

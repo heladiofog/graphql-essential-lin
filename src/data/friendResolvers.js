@@ -1,9 +1,12 @@
-import mongoose from 'mongoose';
-import { Friends } from '../data/friendResolvers';
+import { Friends } from '../data/dbConnectors';
 
 // resolver Map from graphql-tools
 export const resolvers = {
   Query: {
+    // get Friend by Id
+    getAllFriends: () => {
+        return Friends.find();
+    },
     // get Friend by Id
     getFriend: ({ id }) => {
       return new Friend(id, friendDatabase[id]);
@@ -14,7 +17,7 @@ export const resolvers = {
     createFriend: (root, { input }) => {
       const newFriend = new Friends({
         firstName: input.firstName,
-        lastName: input.latName,
+        lastName: input.lastName,
         gender: input.gender,
         age: input.age,
         language: input.language,
@@ -32,6 +35,23 @@ export const resolvers = {
       });
       // return newFriend;
     },
+    // update a friend
+    updateFriend: (root, { input }) => {
+      return new Promise((resolve, reject) => {
+        Friends.findByIdAndUpdate(input.id, input, { new: true }, (err, friend) => {
+          if (err) reject(err);
+          else resolve(friend);
+        });
+      });
+    },
+    // delete a friend
+    deleteFriend: (root, { id }) => {
+      return new Promise((resolve, reject) => {
+        Friends.remove({ _id: id }, (err) => {
+          if (err) reject(err);
+          else resolve('Successfully deleted friend :/');
+        })
+      })
+    }
   }
 };
-
