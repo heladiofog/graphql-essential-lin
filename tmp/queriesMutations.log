@@ -40,7 +40,61 @@ query {
   }
  } 
 }
+## Aliases on queries to run multiple queries
+query {
+  one: getAllFriends {
+    id
+    firstName
+  }
+  second: getOneFriend(id: "5f80edeeec472672f20f06ec"){
+    id
+    firstName
+    lastName
+  }
+  aliens:getAliens{
+    firstName
+    planet
+  }
+}
+## Fragment to avoid code repetition on multiple queries
+query {
+  one: getAllFriends {
+    id
+    ...nameFragment
+  }
+  second: getOneFriend(id: "5f80edeeec472672f20f06ec"){
+    ...nameFragment
+  }
+}
+fragment nameFragment on Friend {
+  firstName
+	lastName
+}
+## Fragment to avoid code repetition on multiple queries, sample 2
+query {
+  one: getAllFriends {
+    id
+    ...nameFragment
+  }
+  second: getOneFriend(id: "5f80edeeec472672f20f06ec"){
+    ...nameFragment
+  }
+  third: getAliens {
+    ...alienNameFragment
+  }
+}
 
+fragment nameFragment on Friend {
+  firstName
+	lastName
+  age
+}
+
+fragment alienNameFragment on Alien {
+  id
+  firstName
+	lastName
+}
 
 # Mutations
 mutation {
